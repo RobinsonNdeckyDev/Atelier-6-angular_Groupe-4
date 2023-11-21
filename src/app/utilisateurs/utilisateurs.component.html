@@ -1,0 +1,23 @@
+<app-header></app-header>
+<h2 class="text-center my-5">Liste des utilisateurs</h2>
+
+<!-- <input type="text" [(ngModel)]="searchQuery" placeholder="Search users"> -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4" *ngFor="let user of users">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Prénom et nom: {{ user.name }}</h5>
+                    <p class="card-text">Adresse email: {{ user.email }}</p>
+                    <p class="card-text">Numéro de téléphone: {{ user.phone }}</p>
+                    <p class="card-text">Site web: {{ user.website }}</p>
+                    <p class="card-text">Nom de la cité:{{ user.address.city }}</p>
+                    <p class="card-text">Nom de la rue: {{ user.address.street }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>
