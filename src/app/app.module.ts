@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { BsModalRef } from 'ngx-bootstrap/modal';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UtilisateursComponent } from './utilisateurs/utilisateurs.component';
@@ -25,7 +25,7 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
     // ModalModule.forRoot()
   ],
-  providers: [],
+  providers: [BsModalRef],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

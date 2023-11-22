@@ -6,16 +6,17 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ApiService {
-  archiveArticle(articleId: number) {
-    throw new Error('Method not implemented.');
-  }
-  
+
   private baseUrl = 'https://jsonplaceholder.typicode.com/';
 
   constructor(private http: HttpClient) {}
 
   getPosts(): Observable<any[]> {
-  return this.http.get<any[]>(`${this.baseUrl}/posts`);
-}
+    return this.http.get<any[]>(`${this.baseUrl}/posts`);
+  }
+
+  ajouterArticle(article: any): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/posts`, article);
+  }
 
 }
