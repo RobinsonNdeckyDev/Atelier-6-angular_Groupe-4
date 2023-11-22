@@ -6,15 +6,31 @@
 <div class="container">
 
     <div class="d-flex justify-content-between my-3">
-        <button class="btn btn-info btnAjt">Ajouter un article</button>
-        <div class="search w-25">
-            <input type="search" class="form-control" name="searchUser" id="searchUser" placeholder="Recherher un utilisateur">
-        </div>
-    </div>
+      <button class="btn  btnAjt" (click)="ouvrirAjoutModal()" style="background-color: #ED2636;color: white;">Ajouter un article</button>
 
+        <div class="search w-25">
+          <input type="search" class="form-control" name="searchUser" id="searchUser" placeholder="Recherher un utilisateur">
+        </div>
+      </div>
+      <!-- Ajout article -->
+
+      <div *ngIf="isAjoutModalOuvert">
+        <form (ngSubmit)="ajouterArticle()">
+          <div class="mb-3">
+            <label for="titre">Titre :</label>
+            <input type="text" id="titre" name="titre" [(ngModel)]="nouvelArticle.title" class="form-control" required />
+          </div>
+          <div class="mb-3">
+            <label for="contenu">Contenu :</label>
+            <textarea id="contenu" name="contenu" [(ngModel)]="nouvelArticle.body" class="form-control" required></textarea>
+          </div>
+          <button type="submit" class="btn me-3" style="background-color: #ED2636;color: white;">Ajouter</button>
+          <button type="button" class="btn change  " (click)="fermerAjoutModal()">Fermer</button>
+        </form>
+      </div>
 
     <div class="table-responsive overflow-y-scroll mt-5" style="height: 55vh;">
-        <table class="table align-items-center table-flush">
+        <table class="table align-items-center table-flush " style="border: #ED2636;" >
             <thead class="sticky-top fond-bleu">
                 <tr class="">
                     <th scope="col" class="fond-bleu">Id</th>
@@ -36,9 +52,9 @@
                             {{post.body}}
                         </td>
                         <td class="gap-2">
-                            <button class="btn btn-info text-light w-100">Détails</button>
-                            <button class="btn btn-warning text-light w-100">Modifier</button>
-                            <button class="btn btn-danger text-light w-100" (click)="archiveUser()">Archiver</button>
+                            <button class="btn change w-100 mb-2">Détails</button>
+                            <button class="btn change w-100 mb-2">Modifier</button>
+                            <button class="btn change w-100" (click)="archiveUser()">Archiver</button>
                         </td>
                     </tr>
                 </ng-container>

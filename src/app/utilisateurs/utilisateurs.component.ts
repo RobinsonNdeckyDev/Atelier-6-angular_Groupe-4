@@ -8,6 +8,8 @@ import { ApiService } from '../services/users.service';
 export class UtilisateursComponent {
 
   posts: any[] = [];
+  nouvelArticle = { title: '', body: '' };
+  isAjoutModalOuvert = false;
 
   constructor(private apiService: ApiService) {}
 
@@ -18,17 +20,36 @@ export class UtilisateursComponent {
     });
   }
 
-
-  archiveUser(){
-    alert('Bonjour')
+  archiveUser() {
+    alert('Bonjour');
   }
 
-  // Exemple d'archivage d'un utilisateur
-  // archiveUser(userIdToArchive: number) {
-  //   this.apiService.archiveUser(userIdToArchive).subscribe(response => {
-  //     console.log(response);
-  //     // Mettez à jour la liste des utilisateurs après l'archivage
-  //     this.filteredUsers = this.filteredUsers.filter(user => user.id !== userIdToArchive);
-  //   });
-  // }
-}
+  ouvrirAjoutModal() {
+    this.isAjoutModalOuvert = true;
+  }
+
+  fermerAjoutModal() {
+    this.isAjoutModalOuvert = false;
+  }
+
+  ajouterArticle() {
+    const titreTemporaire = this.nouvelArticle.title;
+    const contenuTemporaire = this.nouvelArticle.body;
+
+    this.apiService.ajouterArticle(this.nouvelArticle).subscribe((response: any) => {
+      console.log('Réponse du service après ajout d\'article :', response);
+      this.posts.push(response); // Ajouter le nouvel article à la liste existante
+      this.fermerAjoutModal(); // Fermer le modal
+
+      // Réinitialiser les champs en utilisant les valeurs temporaires
+      this.nouvelArticle = { title: '', body: '' };
+    });
+
+    // Afficher les valeurs pour le débogage
+    console.log('Valeurs après ajout :', titreTemporaire, contenuTemporaire);
+  }
+
+
+
+  }
+
