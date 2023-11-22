@@ -23,7 +23,7 @@ export class ArticlesComponent {
 
 
        // Stocker les données dans le localStorage
-      localStorage.setItem('posts', JSON.stringify(this.posts));
+      localStorage.setItem('Posts', JSON.stringify(this.posts));
     });
   }
 

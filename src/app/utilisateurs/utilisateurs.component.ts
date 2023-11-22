@@ -1,5 +1,5 @@
 import { Component} from '@angular/core';
-import { ApiService } from '../services/users.service';
+import { UtilisateursService } from '../services/utilisateurs.service';
 @Component({
   selector: 'app-utilisateurs',
   templateUrl: './utilisateurs.component.html',
@@ -7,20 +7,19 @@ import { ApiService } from '../services/users.service';
 })
 export class UtilisateursComponent {
 
-  posts: any[] = [];
+  utilisateurs: any[]= [];
 
-  constructor(private apiService: ApiService) {}
+  constructor(private utilisateursService: UtilisateursService){}
 
-  ngOnInit() {
-    this.apiService.getPosts().subscribe((data) => {
-      this.posts = data;
-      console.log(this.posts);
-    });
+  ngOnInit(): void {
+    
+    this.utilisateursService.getUsers().subscribe((data) => {
+      this.utilisateurs = data;
+      console.log(this.utilisateurs);
+
+      // Stocker les données dans le localStorage
+      localStorage.setItem('Utilisateurs', JSON.stringify(this.utilisateurs));
+    })
+    
   }
-
-
-  archiveUser(){
-    alert('Bonjour')
-  }
-
 }
