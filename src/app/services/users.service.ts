@@ -11,13 +11,8 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
-  getUsers(): Observable<any[]> {
-  return this.http.get<any[]>(`${this.baseUrl}users`);
-}
-
-
-searchUsers(query: string): Observable<any[]> {
-  return this.http.get<any[]>(`${this.baseUrl}users?q=${query}`);
+  getPosts(): Observable<any[]> {
+  return this.http.get<any[]>(`${this.baseUrl}/posts`);
 }
 
 }
