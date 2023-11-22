@@ -6,6 +6,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ApiService {
+  archiveArticle(articleId: number) {
+    throw new Error('Method not implemented.');
+  }
   
   private baseUrl = 'https://jsonplaceholder.typicode.com/';
 
