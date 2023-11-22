@@ -1,0 +1,52 @@
+<app-header></app-header>
+<h2 class="text-center my-5">Liste des utilisateurs</h2>
+
+<!-- <input type="text" [(ngModel)]="searchQuery" placeholder="Search users"> -->
+
+<div class="container">
+
+    <div class="d-flex justify-content-between my-3">
+        <button class="btn btn-info btnAjt">Ajouter un utilisateur</button>
+        <div class="search w-25">
+            <input type="search" class="form-control" name="searchUser" id="searchUser" placeholder="Recherher un utilisateur">
+        </div>
+    </div>
+
+
+    <div class="table-responsive overflow-y-scroll mt-5" style="height: 55vh;">
+        <table class="table align-items-center table-flush">
+            <thead class="sticky-top fond-bleu">
+                <tr class="">
+                    <th scope="col" class="fond-bleu">Id</th>
+                    <th scope="col" class="fond-bleu">Prénom</th>
+                    <th scope="col" class="fond-bleu">nom</th>
+                    <th scope="col" class="fond-bleu">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let user of utilisateurs" class="">
+                    <tr>
+                        <!-- <td>
+                            {{post.id}}
+                        </td>
+                        <td>
+                            {{post.title}}
+                        </td>
+                        <td>
+                            {{post.body}}
+                        </td>
+                        <td class="gap-2">
+                            <button class="btn btn-info text-light w-100">Détails</button>
+                            <button class="btn btn-warning text-light w-100">Modifier</button>
+                            <button class="btn btn-danger text-light w-100" (click)="archiveUser()">Archiver</button>
+                        </td> -->
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<app-footer></app-footer>
+
+

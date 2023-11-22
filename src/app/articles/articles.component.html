@@ -1,0 +1,96 @@
+<app-header></app-header>
+<h2 class="text-center my-5">Liste des articles</h2>
+
+<!-- <input type="text" [(ngModel)]="searchQuery" placeholder="Search users"> -->
+
+<div class="container">
+
+    <div class="d-flex justify-content-between my-3">
+        <button class="btn btn-info text-light fw-bold btnAjt">Ajouter un article</button>
+        <button type="button" class="btn btn-danger" routerLink="/users">Users</button>
+        <div class="search w-50 d-flex">
+            <input type="search" class="form-control" name="searchQuery" id="searchUser"
+                [(ngModel)]="searchQuery" placeholder="Rechercher un article 🔍" >
+                <button class="btn btn-info mx-2 text-light fw-bold" (click)="searchArticles()">Rechercher</button>
+                <button class="btn btn-warning text-light fw-bold" (click)="clearSearch()">Effacer</button>
+                <!-- <button class="btn btn-dark text-light"></button> -->
+        </div>
+    </div>
+
+
+    <div class="table-responsive overflow-y-scroll mt-5" style="height: 55vh;">
+        <table class="table align-items-center table-flush">
+            <thead class="sticky-top table-dark fond-bleu">
+                <tr class="">
+                    <th scope="col" class="fond-bleu">Id</th>
+                    <th scope="col" class="fond-bleu">Titre</th>
+                    <th scope="col" class="fond-bleu">Contenu</th>
+                    <th scope="col" class="fond-bleu">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let post of filteredPosts" class="">
+                    <tr>
+                        <td>
+                            {{post.id}}
+                        </td>
+                        <td>
+                            {{post.title}}
+                        </td>
+                        <td>
+                            {{post.body}}
+                        </td>
+                        <td class="gap-2">
+                            <button class="btn btn-info text-light w-100 mb-2" data-bs-toggle="modal" data-bs-target="#detailArticle">Détails</button>
+                            <button class="btn btn-warning text-light w-100 mb-2" data-bs-toggle="modal" data-bs-target="#modifierArticle">Modifier</button>
+                            <button class="btn btn-danger text-light w-100" (click)="archivePost(post.id)">Archiver</button>
+                        </td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<app-footer></app-footer>
+
+
+
+<!-- Modal Detail article -->
+<div class="modal fade" id="detailArticle" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Detail article -->
+<div class="modal fade" id="modifierArticle" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
