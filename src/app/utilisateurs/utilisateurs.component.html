@@ -4,7 +4,49 @@
 <!-- <input type="text" [(ngModel)]="searchQuery" placeholder="Search users"> -->
 
 <div class="container">
-    <div class="row">
+
+    <div class="d-flex justify-content-between my-3">
+        <button class="btn btn-info btnAjt">Ajouter un utilisateur</button>
+        <div class="search w-25">
+            <input type="search" class="form-control" name="searchUser" id="searchUser" placeholder="Recherher un utilisateur">
+        </div>
+    </div>
+
+
+    <div class="table-responsive overflow-y-scroll mt-5" style="height: 55vh;">
+        <table class="table align-items-center table-flush">
+            <thead class="sticky-top fond-bleu">
+                <tr class="">
+                    <th scope="col" class="fond-bleu">Nom</th>
+                    <th scope="col" class="fond-bleu">Prénom</th>
+                    <th scope="col" class="fond-bleu">Email</th>
+                    <th scope="col" class="fond-bleu">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let user of users" class="">
+                    <tr>
+                        <td>
+                            {{user.username}}
+                        </td>
+                        <td>
+                            {{user.name}}
+                        </td>
+                        <td>
+                            {{user.email}}
+                        </td>
+                        <td class="d-flex justify-content-between">
+                            <button class="btn btn-info text-light">Détails</button>
+                            <button class="btn btn-warning text-light">Modifier</button>
+                            <button class="btn btn-danger text-light">Archiver</button>
+                        </td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- <div class="row">
         <div class="col-md-4" *ngFor="let user of users">
             <div class="card mb-4 shadow-sm">
                 <div class="card-body">
@@ -17,7 +59,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>
 
 <app-footer></app-footer>
