@@ -1,12 +1,12 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { ApiService } from '../services/users.service';
-@Component({
-  selector: 'app-utilisateurs',
-  templateUrl: './utilisateurs.component.html',
-  styleUrls: ['./utilisateurs.component.css']
-})
-export class UtilisateursComponent {
 
+@Component({
+  selector: 'app-articles',
+  templateUrl: './articles.component.html',
+  styleUrls: ['./articles.component.css']
+})
+export class ArticlesComponent {
   posts: any[] = [];
 
   constructor(private apiService: ApiService) {}
@@ -22,5 +22,4 @@ export class UtilisateursComponent {
   archiveUser(){
     alert('Bonjour')
   }
-
 }
