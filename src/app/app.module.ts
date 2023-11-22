@@ -4,9 +4,10 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UtilisateursComponent } from './utilisateurs/utilisateurs.component';
-import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { ArticlesComponent } from './articles/articles.component';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
@@ -14,13 +15,15 @@ import { FormsModule } from '@angular/forms';
     AppComponent,
     UtilisateursComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ArticlesComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    // ModalModule.forRoot()
   ],
   providers: [BsModalRef],
   bootstrap: [AppComponent]
