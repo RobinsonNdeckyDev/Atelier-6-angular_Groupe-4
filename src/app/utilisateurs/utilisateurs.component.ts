@@ -1,5 +1,5 @@
 import { Component} from '@angular/core';
-import { ApiService } from '../users.service';
+import { ApiService } from '../services/users.service';
 @Component({
   selector: 'app-utilisateurs',
   templateUrl: './utilisateurs.component.html',
@@ -23,11 +23,4 @@ export class UtilisateursComponent {
     });
   }
 
-  
-
-  // searchUsers() {
-  //   this.apiService.searchUsers(this.searchQuery).subscribe((data) => {
-  //     this.filteredUsers = data;
-  //   });
-  // }
 }
