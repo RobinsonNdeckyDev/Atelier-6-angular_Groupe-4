@@ -9,6 +9,9 @@ import { FooterComponent } from './footer/footer.component';
 import { ArticlesComponent } from './articles/articles.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { StorageService } from './services/storage.service';
+import { DataService } from './services/data.service';
+import { CorbeilleComponent } from './corbeille/corbeille.component';
 
 @NgModule({
   declarations: [
@@ -16,16 +19,21 @@ import { FormsModule } from '@angular/forms';
     UtilisateursComponent,
     HeaderComponent,
     FooterComponent,
-    ArticlesComponent
+    ArticlesComponent,
+    CorbeilleComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    // ModalModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
+
+  // providers: [DataService, StorageService],
+  // bootstrap: [ArticlesComponent]  // Assurez-vous que votre composant est défini comme point d'entrée
+
+
 })
 export class AppModule { }
