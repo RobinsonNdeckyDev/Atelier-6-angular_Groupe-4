@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
 import { ArticlesService } from '../services/articles.service';
+import { DataService } from '../services/data.service';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-articles',
   templateUrl: './articles.component.html',
-  styleUrls: ['./articles.component.css']
+  styleUrls: ['./articles.component.css'],
+  providers: [StorageService]
 })
 export class ArticlesComponent {
   posts: any[] = [];
@@ -12,7 +15,7 @@ export class ArticlesComponent {
   filteredPosts: any[] = [];  // Ajout d'un tableau pour les articles filtrés
   searchQuery = '';
 
-  constructor(private apiService: ArticlesService) {}
+  constructor(private apiService: ArticlesService, private dataService: DataService, private storageService: StorageService) {}
 
   ngOnInit() {
       this.apiService.getPosts().subscribe((data) => {
@@ -32,8 +35,24 @@ export class ArticlesComponent {
   searchArticles() {
     this.filteredPosts = this.posts.filter(post =>
       post.title.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-      post.body.toLowerCase().includes(this.searchQuery.toLowerCase())
+      post.body.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+      String(post.id).includes(this.searchQuery)
     );
+  }
+
+  // deletePost(postId: number) {
+  //   this.apiService.deletePost(postId).subscribe(() => {
+  //     Actualiser la liste des posts après la suppression
+  //     this.ngOnInit();
+  //   });
+  // }
+
+
+  deletePost(postId: number) {
+    this.apiService.deletePost(postId).subscribe(() => {
+      // Supprimer le post de la liste locale
+      this.posts = this.posts.filter(post => post.id !== postId);
+    });
   }
 
 
@@ -44,19 +63,6 @@ export class ArticlesComponent {
   }
 
 
-  // Ajoutez cette méthode pour archiver un post
-  archivePost(postId: number) {
-    this.apiService.archivePost(postId).subscribe(
-      (response: any) => {
-        console.log('Post archivé avec succès', response);
-        // Mettez à jour l'interface utilisateur si nécessaire
-        // Vous pouvez également réactualiser la liste des posts après l'archivage
-        this.filteredPosts = this.filteredPosts.filter(post => post.id !== postId);
-      },
-      (error: any) => {
-        console.error('Erreur lors de l\'archivage du post', error);
-      }
-    );
-  }
   
+
 }

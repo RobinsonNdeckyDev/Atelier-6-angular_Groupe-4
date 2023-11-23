@@ -9,12 +9,22 @@
         <button class="btn btn-info text-light fw-bold btnAjt">Ajouter un article</button>
         <!-- <button type="button" class="btn btn-danger" routerLink="/users">Users</button> -->
         <div class="search w-50 d-flex">
-            <input type="search" class="form-control" name="searchQuery" id="searchUser"
-                [(ngModel)]="searchQuery" placeholder="Rechercher un article 🔍" >
-                <button class="btn btnAjt mx-2 text-light fw-bold" (click)="searchArticles()">Rechercher</button>
-                <button class="btn btnEff fw-bold" (click)="clearSearch()">Effacer</button>
+            <input type="search" class="form-control" name="searchQuery" id="searchUser" 
+                placeholder="Rechercher un article 🔍">
+            <button class="btn btnAjt mx-2 text-light fw-bold" >Rechercher</button>
+            <button class="btn btnEff fw-bold" >Effacer</button>
         </div>
     </div>
+
+
+    <!-- <h2>Archived Posts</h2>
+    <div *ngFor="let archivedPost of .getArchivedPosts()">
+       
+        <h3>{{ archivedPost.title }}</h3>
+        <p>{{ archivedPost.body }}</p>
+        <button (click)="removeArchivedPost(archivedPost)">Supprimer de l'archive</button>
+    </div> -->
+
 
     <div class="table-responsive overflow-y-scroll mt-4" style="height: 45vh;">
         <table class="table align-items-center table-flush">
@@ -27,21 +37,23 @@
                 </tr>
             </thead>
             <tbody>
-                <ng-container *ngFor="let post of filteredPosts" class="">
+                <ng-container  class="">
                     <tr>
                         <td>
-                            {{post.id}}
+                           
                         </td>
                         <td>
-                            {{post.title}}
+                            <!-- {{post.title}} -->
                         </td>
                         <td>
-                            {{post.body}}
+                            <!-- {{post.body}} -->
                         </td>
                         <td class="d-flex py-5">
-                            <button class="btn btn-info text-light me-2" data-bs-toggle="modal" data-bs-target="#detailArticle">Détails</button>
-                            <button class="btn btn-warning text-light me-2" data-bs-toggle="modal" data-bs-target="#modifierArticle">Modifier</button>
-                            <button class="btn btn-danger text-light"(click)="deletePost(post.id)">Archiver</button>
+                            <button class="btn btn-info text-light me-2" data-bs-toggle="modal"
+                                data-bs-target="#detailArticle">Détails</button>
+                            <button class="btn btn-warning text-light me-2" data-bs-toggle="modal"
+                                data-bs-target="#modifierArticle">Modifier</button>
+                            <button class="btn btn-danger text-light">Archiver</button>
                         </td>
                     </tr>
                 </ng-container>

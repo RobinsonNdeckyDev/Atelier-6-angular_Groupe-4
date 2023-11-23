@@ -7,7 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class ArticlesService {
 
-  private baseUrl = 'https://jsonplaceholder.typicode.com/';
+  private baseUrl = 'https://jsonplaceholder.typicode.com';
+  apiUrl: any;
 
   constructor(private http: HttpClient) {}
 
@@ -15,24 +16,12 @@ export class ArticlesService {
   return this.http.get<any[]>(`${this.baseUrl}/posts`);
 }
 
-// Archiver un post par son ID
-  archivePost(postId: number): Observable<any> {
-    const url = `${this.baseUrl}/${postId}`;
-    return this.http.delete(url);
+// Supprimer un post par son ID
+  deletePost(postId: number): Observable<any> {
+    const url = `${this.baseUrl}/posts/${postId}`; // Correction ici
+    return this.http.delete<any>(url);
   }
+
 
 }
 
-
-// Récupérer un article par son ID
-//   getArticleById(postId: number): Observable<any> {
-//     const url = `${this.baseUrl}/${postId}`;
-//     return this.http.get<any>(url);
-//     console.log(url);
-//   }
-
-//   Archiver un article
-//   archiveArticle(postId: number): Observable<any> {
-//     const url = `${this.baseUrl}/${postId}`;
-//     return this.http.delete(url);
-//   }
