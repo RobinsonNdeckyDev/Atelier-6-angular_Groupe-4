@@ -12,13 +12,15 @@ import { StorageService } from '../services/storage.service';
 export class ArticlesComponent {
   posts: any[] = [];
 
+  currentArticle: any;
+
   filteredPosts: any[] = [];  // Ajout d'un tableau pour les articles filtrés
   searchQuery = '';
 
-  constructor(private apiService: ArticlesService, private dataService: DataService, private storageService: StorageService) {}
+  constructor(private articlesService: ArticlesService, private dataService: DataService, private storageService: StorageService) {}
 
   ngOnInit() {
-      this.apiService.getPosts().subscribe((data) => {
+      this.articlesService.getPosts().subscribe((data) => {
       this.posts = data;
       console.log(this.posts);
 
@@ -40,21 +42,6 @@ export class ArticlesComponent {
     );
   }
 
-  // deletePost(postId: number) {
-  //   this.apiService.deletePost(postId).subscribe(() => {
-  //     Actualiser la liste des posts après la suppression
-  //     this.ngOnInit();
-  //   });
-  // }
-
-
-  deletePost(postId: number) {
-    this.apiService.deletePost(postId).subscribe(() => {
-      // Supprimer le post de la liste locale
-      this.posts = this.posts.filter(post => post.id !== postId);
-    });
-  }
-
 
   // Réinitialisez la liste des articles filtrés lorsque le champ de recherche est vide
   clearSearch() {
@@ -62,6 +49,21 @@ export class ArticlesComponent {
     this.filteredPosts = this.posts;
   }
 
+ 
+
+  deletePost(postId: number) {
+    this.articlesService.deletePost(postId).subscribe(() => {
+      // Supprimer le post de la liste locale
+      this.posts = this.posts.filter(post => post.id !== postId);
+      
+    });
+  }
+
+
+  detailArticle(paramPost: any) {
+    this.currentArticle = this.posts.find((item:any)=> item.id==paramPost)
+    console.log(this.currentArticle);
+  }
 
   
 

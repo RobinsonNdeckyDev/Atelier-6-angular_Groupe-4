@@ -27,7 +27,7 @@
                 </tr>
             </thead>
             <tbody>
-                <ng-container *ngFor="let post of filteredPosts" class="">
+                <ng-container *ngFor="let post of posts" class="">
                     <tr>
                         <td>
                             {{post.id}}
@@ -39,7 +39,7 @@
                             {{post.body}}
                         </td>
                         <td class="d-flex py-5">
-                            <button class="btn btn-info text-light me-2" data-bs-toggle="modal" data-bs-target="#detailArticle">Détails</button>
+                            <button class="btn btn-info text-light me-2" data-bs-toggle="modal" data-bs-target="#detailArticle" (click)="detailArticle(post.id)">Détails</button>
                             <button class="btn btn-warning text-light me-2" data-bs-toggle="modal" data-bs-target="#modifierArticle">Modifier</button>
                             <button class="btn btn-danger text-light"(click)="deletePost(post.id)">Archiver</button>
                         </td>
@@ -63,7 +63,10 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                ...
+                <p>Identifiant poste: {{currentArticle?.id}}</p>
+                <p>Titre poste: {{currentArticle?.title}} </p>
+                <p>Contenu du poste: {{currentArticle?.body}} </p>
+                <p>User ayant commenté: {{currentArticle?.userId}} </p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -74,7 +77,7 @@
 </div>
 
 
-<!-- Modal Detail article -->
+<!-- Modal Modifier article -->
 <div class="modal fade" id="modifierArticle" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -83,7 +86,10 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                ...
+                <p>Identifiant poste: {{currentArticle?.id}}</p>
+                <p>Titre poste: {{currentArticle?.title}} </p>
+                <p>Contenu du poste: {{currentArticle?.body}} </p>
+                <p>User ayant commenté: {{currentArticle?.userId}} </p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
