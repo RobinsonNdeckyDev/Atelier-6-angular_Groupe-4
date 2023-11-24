@@ -10,7 +10,6 @@ export class DataService {
   private apiUrl = 'https://jsonplaceholder.typicode.com';
 
   constructor(private http: HttpClient) {}
-
   getPosts(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/posts`);
   }
