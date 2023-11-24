@@ -3,6 +3,8 @@ import { ArticlesService } from '../services/articles.service';
 import { DataService } from '../services/data.service';
 import { StorageService } from '../services/storage.service';
 import { take } from 'rxjs/operators'; // Ajouter cette importation
+import Swal from 'sweetalert2';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-articles',
@@ -40,14 +42,16 @@ export class ArticlesComponent {
   }
 
 
-  ajouterPost() {
-    // Utilisez le service pour ajouter le nouveau post
-    this.articlesService.ajouterPost(this.nouveauPost).subscribe((response) => {
-      this.filteredPosts.unshift(response); // Ajouter également au début de la liste filtrée
-      this.nouveauPost = { title: '', body: '' }; // Réinitialisez le modèle du formulaire
-      this.searchArticles(); // Mettez à jour la liste filtrée si nécessaire
-    });
-  }
+ ajouterPost() {
+  // Utilisez le service pour ajouter le nouveau post
+  this.articlesService.ajouterPost(this.nouveauPost).subscribe((response) => {
+    this.posts.unshift(response); // Ajouter le nouveau post au début de la liste complète
+    this.filteredPosts.unshift(response); // Ajouter également au début de la liste filtrée
+    this.nouveauPost = { title: '', body: '' }; // Réinitialisez le modèle du formulaire
+    this.searchArticles(); // Mettez à jour la liste filtrée si nécessaire
+    this.sweetAlert('success', 'Bravo', 'article ajouté avec succés', 2000);
+  });
+}
 
 
   // Nouvelle méthode pour commencer l'édition d'un post
@@ -137,8 +141,32 @@ export class ArticlesComponent {
   detailArticle(paramPost: any) {
     this.currentArticle = this.posts.find((item:any)=> item.id==paramPost)
     console.log(this.currentArticle);
+
+    // Load comments for the current article
+    this.loadComments(this.currentArticle.id);
+
   }
 
+
+
+  sweetAlert(icon: any, title: any, text: any, timer: 2000){
+    Swal.fire({
+    icon: icon,
+    title: title,
+    text: text,
+    timer: timer
+  });
+  }
+
+
+   loadComments(articleId: number) {
+  this.articlesService.getCommentsByArticleID(articleId).subscribe((comments: any[]) => {
+    console.log('Comments for article ID:', articleId, comments);
+    // Assuming you want to associate comments with the current article
+    this.currentArticle.comments = comments;
+  });
+
+  }
   
 
 }
