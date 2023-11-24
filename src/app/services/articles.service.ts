@@ -13,15 +13,25 @@ export class ArticlesService {
   constructor(private http: HttpClient) {}
 
   getPosts(): Observable<any[]> {
-  return this.http.get<any[]>(`${this.baseUrl}/posts`);
-}
+    return this.http.get<any[]>(`${this.baseUrl}/posts`);
+  }
 
-// Supprimer un post par son ID
+  ajouterPost(post: any): Observable<any> {
+    // Vous devrez adapter cette méthode en fonction de votre API
+    return this.http.post(`${this.baseUrl}/posts`, post);
+  }
+
+  // Supprimer un post par son ID
   deletePost(postId: number): Observable<any> {
     const url = `${this.baseUrl}/posts/${postId}`; // Correction ici
     return this.http.delete<any>(url);
   }
 
+  // mise à jour de l'api
+  mettreAJourPost(post: any): Observable<any> {
+    // Vous devrez adapter cette méthode en fonction de votre API
+    return this.http.put(`${this.baseUrl}/posts/${post.id}`, post);
+  }
 
 }
 

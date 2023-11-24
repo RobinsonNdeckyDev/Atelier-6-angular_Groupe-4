@@ -6,13 +6,13 @@
 <div class="container">
 
     <div class="d-flex justify-content-between my-3">
-        <button class="btn btn-info text-light fw-bold btnAjt">Ajouter un article</button>
+        <button class="btn btn-info text-light fw-bold btnAjt" data-bs-toggle="modal" data-bs-target="#ajoutArticle">Ajouter un article</button>
         <!-- <button type="button" class="btn btn-danger" routerLink="/users">Users</button> -->
         <div class="search w-50 d-flex">
             <input type="search" class="form-control" name="searchQuery" id="searchUser"
-                [(ngModel)]="searchQuery" placeholder="Rechercher un article 🔍" >
-                <button class="btn btnAjt mx-2 text-light fw-bold" (click)="searchArticles()">Rechercher</button>
-                <button class="btn btnEff fw-bold" (click)="clearSearch()">Effacer</button>
+                [(ngModel)]="searchQuery" placeholder="Rechercher un article 🔍" (input)="onInputChange($event)">
+                <!-- <button class="btn btnAjt mx-2 text-light fw-bold" (click)="searchArticles()">Rechercher</button>
+                <button class="btn btnEff fw-bold" (click)="clearSearch()">Effacer</button> -->
         </div>
     </div>
 
@@ -20,17 +20,17 @@
         <table class="table align-items-center table-flush">
             <thead class="sticky-top">
                 <tr class="">
-                    <th scope="col" class="fond-bleu">Id</th>
+                    <th scope="col" class="fond-bleu">Image</th>
                     <th scope="col" class="fond-bleu">Titre</th>
                     <th scope="col" class="fond-bleu">Contenu</th>
                     <th scope="col" class="fond-bleu">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <ng-container *ngFor="let post of posts" class="">
+                <ng-container *ngFor="let post of filteredPosts" class="">
                     <tr>
                         <td>
-                            {{post.id}}
+                            <img src="../../assets/tech1.webp" style="width: 300px; height: 80px;" class="img-fluid" alt="">
                         </td>
                         <td>
                             {{post.title}}
@@ -40,7 +40,7 @@
                         </td>
                         <td class="d-flex py-5">
                             <button class="btn btn-info text-light me-2" data-bs-toggle="modal" data-bs-target="#detailArticle" (click)="detailArticle(post.id)">Détails</button>
-                            <button class="btn btn-warning text-light me-2" data-bs-toggle="modal" data-bs-target="#modifierArticle">Modifier</button>
+                            <button class="btn btn-warning text-light me-2" data-bs-toggle="modal" data-bs-target="#modifierArticle" (click)="commencerEdition(post)">Modifier</button>
                             <button class="btn btn-danger text-light"(click)="deletePost(post.id)">Archiver</button>
                         </td>
                     </tr>
@@ -54,23 +54,81 @@
 
 
 
-<!-- Modal Detail article -->
-<div class="modal fade" id="detailArticle" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+<!-- Modal ajout article -->
+<div class="modal fade" id="ajoutArticle" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+            <div class="modal-header" style="background-color: #ED2636;">
+                <h1 class="modal-title text-light fw-bold fs-5" id="exampleModalLabel">Ajouter un article</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>Identifiant poste: {{currentArticle?.id}}</p>
-                <p>Titre poste: {{currentArticle?.title}} </p>
-                <p>Contenu du poste: {{currentArticle?.body}} </p>
-                <p>User ayant commenté: {{currentArticle?.userId}} </p>
+                <form (ngSubmit)="ajouterPost()" #ajoutPostForm="ngForm">
+                    <div class="form-group">
+                        <label for="title">Titre:</label>
+                        <input type="text" class="form-control" id="title" name="title" [(ngModel)]="nouveauPost.title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="body">Contenu:</label>
+                        <textarea class="form-control" id="body" name="body" [(ngModel)]="nouveauPost.body" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Ajouter</button>
+                </form>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Modifier article -->
+<div class="modal fade" id="ajoutArticle" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Ajouter un article</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form (ngSubmit)="ajouterPost()" #ajoutPostForm="ngForm">
+                    <div class="form-group">
+                        <label for="title">Titre:</label>
+                        <input type="text" class="form-control" id="title" name="title" [(ngModel)]="nouveauPost.title"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="body">Contenu:</label>
+                        <textarea class="form-control" id="body" name="body" [(ngModel)]="nouveauPost.body"
+                            required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Ajouter</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Detail article -->
+<div class="modal fade" id="detailArticle" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header text-light fw-bold" style="background-color: #ED2636;">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Détail de l'article</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="d-flex justify-content-center">
+                    <img src="../../assets/tech1.webp" class="" alt="">
+                </div>
+                <h3 class="text-center my-3" style="color: #470C11;">{{currentArticle?.title}} </h3>
+                <div class="mx-5">
+                    <p><span class="fw-bold" style="color: #ED2636;">Description:</span> <br> {{currentArticle?.body}} </p>
+                    <p><span class="fw-bold" style="color: #ED2636;">Commentaires:</span> {{currentArticle?.userId}} </p>
+                </div>
+            </div>
+            <div class="modal-footer" style="background-color: #ED2636;">
+                <button type="button" class="btn fw-bold text-light" style="background-color: #470C11;" data-bs-dismiss="modal">Fermer</button>
             </div>
         </div>
     </div>
