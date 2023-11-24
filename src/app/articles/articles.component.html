@@ -124,7 +124,15 @@
                 <h3 class="text-center my-3" style="color: #470C11;">{{currentArticle?.title}} </h3>
                 <div class="mx-5">
                     <p><span class="fw-bold" style="color: #ED2636;">Description:</span> <br> {{currentArticle?.body}} </p>
-                    <p><span class="fw-bold" style="color: #ED2636;">Commentaires:</span> {{currentArticle?.userId}} </p>
+                    <!-- <p><span class="fw-bold" style="color: #ED2636;">Commentaires:</span> {{currentArticle?.userId}} </p> -->
+                </div>
+                <div>
+                    <h3 style="color: #ED2636;">Liste des commentaires :</h3>
+                    <div *ngFor="let comment of currentArticle?.comments">
+                        <hr>
+                        <p><strong>{{ comment.name }}</strong></p>
+                        <p>{{ comment.body }}</p>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer" style="background-color: #ED2636;">
@@ -143,12 +151,12 @@
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <!-- <div class="modal-body">
                 <p>Identifiant poste: {{currentArticle?.id}}</p>
                 <p>Titre poste: {{currentArticle?.title}} </p>
                 <p>Contenu du poste: {{currentArticle?.body}} </p>
                 <p>User ayant commenté: {{currentArticle?.userId}} </p>
-            </div>
+            </div> -->
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary">Save changes</button>

@@ -33,5 +33,11 @@ export class ArticlesService {
     return this.http.put(`${this.baseUrl}/posts/${post.id}`, post);
   }
 
+
+  getCommentsByArticleID(articleId: number): Observable<any[]> {
+    const url = `${this.baseUrl}/posts/${articleId}/comments`;
+    return this.http.get<any[]>(url);
+  }
+
 }
 
